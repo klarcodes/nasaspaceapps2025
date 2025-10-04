@@ -1,0 +1,45 @@
+#home ul, #home li {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#home li::marker {
+    content: none;
+}
+
+#home ul ul {
+    padding-left: 1.2rem;
+    margin-left: 0.5rem;
+}
+
+#home li {
+    cursor: pointer;
+    user-select: none;
+    margin: 0.2rem 0;
+    font-size: 14px;
+}
+
+#home .tree-toggle::before {
+    content: '+';
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.3em;
+    font-weight: bold;
+}
+
+#home .tree-toggle.collapsed::before {
+    content: '+';
+}
+
+#home .tree-toggle.expanded::before {
+    content: '-';
+}
+
+#home .tree-submenu {
+    display: none;
+}
+
+#home .tree-submenu.show {
+    display: block;
+}
