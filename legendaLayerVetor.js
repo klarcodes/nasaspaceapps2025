@@ -583,17 +583,8 @@ function prepareForm() {
     </div>
 
 
-    </div>
-
-    
-    <!-- Input de geometria -->
-  <input 
-    type="hidden" 
-    class="form-control mb-3" 
-    name="geom" 
-    readonly 
-    value='${JSON.stringify(layer.toGeoJSON().features[0].geometry)}'
-  />
+    </div>    
+   
 <!-- Mensagem de erro -->
     <div id="polygonEditMessage" class="mb-3" style="display:none;"></div>
     <button type="button" id="polygonEditBtn" class="btn btn-success">Salvar</button>
