@@ -67,7 +67,7 @@ session_start();
                     <ul class="tree-submenu show">
 
                         <li>
-                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Índices de Vegetação</b></span>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Vegetation Indices</b></span>
                             <ul class="tree-submenu">
 
                                 <li><input class="input" type="checkbox" id="MODIS_Aqua_L3_EVI_Monthly" onclick="addRemoverLayerWms('MODIS_Aqua_L3_EVI_Monthly', '2025-08-31', 'MODIS_Aqua_L3_EVI_Monthly', map)"> MODIS_Aqua_L3_EVI_Monthly
@@ -120,7 +120,7 @@ session_start();
 
 
                         <li>
-                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Status de Perturbação da Vegetação</b></span>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Vegetation Disturbance Status</b></span>
                             <ul class="tree-submenu">
 
                                 <li><input class="input" type="checkbox" id="OPERA_L3_DIST-ALERT-HLS_Color_Index" onclick="addRemoverLayerWms('OPERA_L3_DIST-ALERT-HLS_Color_Index', '2025-08-31', 'OPERA_L3_DIST-ALERT-HLS_Color_Index', map)"> OPERA_L3_DIST-ALERT-HLS_Color_Index
@@ -130,7 +130,7 @@ session_start();
                         </li>
 
                         <li>
-                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Extensão Urbana</b></span>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Urban Extents</b></span>
                             <ul class="tree-submenu">
 
                                 <li><input class="input" type="checkbox" id="GRUMP_Urban_Extents_Grid_1995" onclick="addRemoverLayerWms('GRUMP_Urban_Extents_Grid_1995', '2025-08-31', 'GRUMP_Urban_Extents_Grid_1995', map)"> GRUMP_Urban_Extents_Grid_1995
@@ -143,13 +143,23 @@ session_start();
                         </li>
 
                         <li>
-                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Corpos d'água</b></span>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Water Bodies</b></span>
                             <ul class="tree-submenu">
 
                                 <li><input class="input" type="checkbox" id="MODIS_Water_Mask" onclick="addRemoverLayerWms('MODIS_Water_Mask', '2025-01-01', 'MODIS_Water_Mask', map)"> MODIS_Water_Mask
                                 </li>
 
                                 <li><input class="input" type="checkbox" id="GRanD_Reservoirs" onclick="addRemoverLayerWms('GRanD_Reservoirs', '2025-08-31', 'GRanD_Reservoirs', map)"> GRanD_Reservoirs
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Human Built-up And Settlement Extent</b></span>
+                            <ul class="tree-submenu">
+
+                                <li><input class="input" type="checkbox" id="Landsat_Human_Built-up_And_Settlement_Extent" onclick="addRemoverLayerWms('Landsat_Human_Built-up_And_Settlement_Extent', '2025-10-03', 'Landsat_Human_Built-up_And_Settlement_Extent', map)"> Landsat_Human_Built-up_And_Settlement_Extent
                                 </li>
 
                             </ul>
