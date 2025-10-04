@@ -31,9 +31,9 @@ var googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={
 
 if(window.screen.width > "500"){
 
-  var latit = 1.80054;
-  var long = -61.4714;
-  var zm = 7;
+var latit = -10.3333;
+var long = -53.2;
+var zm = 4;
   var map = L.map(document.getElementById('map'), {
     center: [latit, long],
     zoom: zm,

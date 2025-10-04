@@ -60,13 +60,113 @@ session_start();
 
                 <!-- Mapas - Fim  -->
 
+                <!-- Mapas da NASA - Início -->
+
+                <li>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Mapas da NASA</b></span>
+                    <ul class="tree-submenu show">
+
+                        <li>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Índices de Vegetação</b></span>
+                            <ul class="tree-submenu">
+
+                                <li><input class="input" type="checkbox" id="MODIS_Aqua_L3_EVI_Monthly" onclick="addRemoverLayerWms('MODIS_Aqua_L3_EVI_Monthly', '2025-08-31', 'MODIS_Aqua_L3_EVI_Monthly', map)"> MODIS_Aqua_L3_EVI_Monthly
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Aqua_L3_EVI_16Day" onclick="addRemoverLayerWms('MODIS_Aqua_L3_EVI_16Day', '2025-08-31', 'MODIS_Aqua_L3_EVI_16Day', map)"> MODIS_Aqua_L3_EVI_16Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Aqua_L3_NDVI_Monthly" onclick="addRemoverLayerWms('MODIS_Aqua_L3_NDVI_Monthly', '2025-08-31', 'MODIS_Aqua_L3_NDVI_Monthly', map)"> MODIS_Aqua_L3_NDVI_Monthly
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Aqua_L3_NDVI_16Day" onclick="addRemoverLayerWms('MODIS_Aqua_L3_NDVI_16Day', '2025-08-31', 'MODIS_Aqua_L3_NDVI_16Day', map)"> MODIS_Aqua_L3_NDVI_16Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="Landsat_WELD_NDVI_Global_Monthly" onclick="addRemoverLayerWms('Landsat_WELD_NDVI_Global_Monthly', '2001-11-30', 'Landsat_WELD_NDVI_Global_Monthly', map)"> Landsat_WELD_NDVI_Global_Monthly
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="Landsat_WELD_NDVI_Global_Annual" onclick="addRemoverLayerWms('Landsat_WELD_NDVI_Global_Annual', '2001-11-30', 'Landsat_WELD_NDVI_Global_Annual', map)"> Landsat_WELD_NDVI_Global_Annual
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="VIIRS_SNPP_NDVI_8Day" onclick="addRemoverLayerWms('VIIRS_SNPP_NDVI_8Day', '2025-08-31', 'VIIRS_SNPP_NDVI_8Day', map)"> VIIRS_SNPP_NDVI_8Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="VIIRS_SNPP_EVI_8Day" onclick="addRemoverLayerWms('VIIRS_SNPP_EVI_8Day', '2025-08-31', 'VIIRS_SNPP_EVI_8Day', map)"> VIIRS_SNPP_EVI_8Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_NDVI_8Day" onclick="addRemoverLayerWms('MODIS_Terra_NDVI_8Day', '2025-08-31', 'MODIS_Terra_NDVI_8Day', map)"> MODIS_Terra_NDVI_8Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_EVI_8Day" onclick="addRemoverLayerWms('MODIS_Terra_EVI_8Day', '2025-08-31', 'MODIS_Terra_EVI_8Day', map)"> MODIS_Terra_EVI_8Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_L3_NDVI_16Day" onclick="addRemoverLayerWms('MODIS_Terra_L3_NDVI_16Day', '2025-08-31', 'MODIS_Terra_L3_NDVI_16Day', map)"> MODIS_Terra_L3_NDVI_16Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_L3_NDVI_Monthly" onclick="addRemoverLayerWms('MODIS_Terra_L3_NDVI_Monthly', '2025-08-31', 'MODIS_Terra_L3_NDVI_Monthly', map)"> MODIS_Terra_L3_NDVI_Monthly
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_L3_EVI_16Day" onclick="addRemoverLayerWms('MODIS_Terra_L3_EVI_16Day', '2025-08-31', 'MODIS_Terra_L3_EVI_16Day', map)"> MODIS_Terra_L3_EVI_16Day
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MODIS_Terra_L3_EVI_Monthly" onclick="addRemoverLayerWms('MODIS_Terra_L3_EVI_Monthly', '2025-08-31', 'MODIS_Terra_L3_EVI_Monthly', map)"> MODIS_Terra_L3_EVI_Monthly
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="MISR_Land_NDVI_Average_Monthly" onclick="addRemoverLayerWms('MISR_Land_NDVI_Average_Monthly', '2025-08-31', 'MISR_Land_NDVI_Average_Monthly', map)"> MISR_Land_NDVI_Average_Monthly
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Status de Perturbação da Vegetação</b></span>
+                            <ul class="tree-submenu">
+
+                                <li><input class="input" type="checkbox" id="OPERA_L3_DIST-ALERT-HLS_Color_Index" onclick="addRemoverLayerWms('OPERA_L3_DIST-ALERT-HLS_Color_Index', '2025-08-31', 'OPERA_L3_DIST-ALERT-HLS_Color_Index', map)"> OPERA_L3_DIST-ALERT-HLS_Color_Index
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Extensão Urbana</b></span>
+                            <ul class="tree-submenu">
+
+                                <li><input class="input" type="checkbox" id="GRUMP_Urban_Extents_Grid_1995" onclick="addRemoverLayerWms('GRUMP_Urban_Extents_Grid_1995', '2025-08-31', 'GRUMP_Urban_Extents_Grid_1995', map)"> GRUMP_Urban_Extents_Grid_1995
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="LECZ_Urban_Rural_Extents_Below_10m" onclick="addRemoverLayerWms('LECZ_Urban_Rural_Extents_Below_10m', '2025-08-31', 'LECZ_Urban_Rural_Extents_Below_10m', map)"> LECZ_Urban_Rural_Extents_Below_10m
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <span class="tree-toggle collapsed" onclick="toggleSubmenu(this)"><b>Corpos d'água</b></span>
+                            <ul class="tree-submenu">
+
+                                <li><input class="input" type="checkbox" id="MODIS_Water_Mask" onclick="addRemoverLayerWms('MODIS_Water_Mask', '2025-01-01', 'MODIS_Water_Mask', map)"> MODIS_Water_Mask
+                                </li>
+
+                                <li><input class="input" type="checkbox" id="GRanD_Reservoirs" onclick="addRemoverLayerWms('GRanD_Reservoirs', '2025-08-31', 'GRanD_Reservoirs', map)"> GRanD_Reservoirs
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <!-- Mapas da NASA - Fim  -->
+
                 <!-- Análise Ambiental - Início -->
 
                 <li>
                     <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Análise Ambiental</b></span>
                     <ul class="tree-submenu show">
 
-                        <!-- Base Cartográfica - Início -->
+                        <!-- Análise Ambiental - Início -->
 
                         <li>
                             <input class="input" type="checkbox"
@@ -113,6 +213,33 @@ session_start();
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'escassez_hidrica', nasa_conteudo, 'Escassez Hidrica')"
                                 id="escassez_hidrica"> Escassez Hidrica
+                        </li>
+
+
+                        <!-- Análise Ambiental - Fim -->
+                    </ul>
+                </li>
+
+                <!-- Análise Ambiental - Fim -->
+
+                <!-- Base Cartográfica - Início -->
+
+                <li>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Base Cartográfica</b></span>
+                    <ul class="tree-submenu show">
+
+                        <!-- Base Cartográfica - Início -->
+
+                        <li>
+                            <input class="input" type="checkbox"
+                                onclick="addRemoverLayer('municipios_limites', limitesMun_options, map, 'limitesMun', limitesMun_conteudo, 'Limites Municipais')"
+                                id="limitesMun" checked> Limites Municipais
+                        </li>
+
+                        <li>
+                            <input class="input" type="checkbox"
+                                onclick="addRemoverLayer('estado_limites', limitesEst_options, map, 'limitesEst', limitesEst_conteudo, 'Limites do Estado')"
+                                id="limitesEst" checked> Limites do Estado
                         </li>
 
 

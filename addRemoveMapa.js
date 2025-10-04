@@ -1,12 +1,12 @@
 var layers = {};
 
-function addRemoverLayer(urlLayer, layerOptions, map, id, conteudo = '', titulo = '') {
+function addRemoverLayer(urlLayer, layerOptions, map, id, conteudo = '', titulo = '', php = false, tabela = '') {
 
     var checkbox = document.getElementById(id);
 
     if (checkbox.checked) {
         // Se o checkbox estiver marcado, cria a camada e a adiciona
-        layers[id] = createLayer(urlLayer, layerOptions, map, id, conteudo, titulo);
+        layers[id] = createLayer(urlLayer, layerOptions, map, id, conteudo, titulo, php, tabela);
 
     } else {
         // Se o checkbox estiver desmarcado, remove a camada do mapa
@@ -23,15 +23,24 @@ function addRemoverLayer(urlLayer, layerOptions, map, id, conteudo = '', titulo 
 
 
 // Função genérica para criar camadas e adicionar dados com ou sem marker cluster
-function createLayer(urlLayer, layerOptions, map, id, conteudo, titulo) {
+function createLayer(urlLayer, layerOptions, map, id, conteudo, titulo, php, tabela) {
 
     var layer;
 
     // Cria uma camada GeoJSON normal (sem cluster)
     layer = L.geoJSON(null, layerOptions);
 
+    if(php == true){
+
+        var url = 'http://localhost/nasaspaceapps2025/'+tabela;
+
+    }else{
+
     var url = 'https://geoserverintranet.femarh.rr.gov.br/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite:' + urlLayer + '&outputFormat=application/json';
 
+    }
+
+    console.log(url);
     $.getJSON(url, function (data) {
         layer.addData(data);
 
@@ -190,7 +199,7 @@ function createLayer2(prop, map, filtro, conteudo, titulo) {
     // Cria uma camada GeoJSON normal (sem cluster)
 
 
-    var url = 'http://localhost/sig_nasa/';
+    var url = 'http://localhost/nasaspaceapps2025/';
 
     $.getJSON(url + 'nasaTabela.php', function (data) {
 
@@ -250,5 +259,59 @@ function createLayer2(prop, map, filtro, conteudo, titulo) {
         return layer;  // Retorna a camada, caso seja necessário manipular depois
 
     })
+
+}
+
+
+
+
+
+
+
+
+
+var layersWms = {};
+
+function addRemoverLayerWms(layer, date, id, map) {
+
+    var checkbox = document.getElementById(id);
+
+    if (checkbox.checked) {
+        // Se o checkbox estiver marcado, cria a camada e a adiciona
+        layersWms[id] = createLayerWms(layer, date, id, map);
+
+    } else {
+        // Se o checkbox estiver desmarcado, remove a camada do mapa
+        if (layersWms[id]) {
+            map.removeLayer(layersWms[id]);  // Remove a camada correta (cluster ou não)
+            delete layersWms[id];  // Remove a referência da camada
+        }
+    }
+
+
+
+}
+
+
+
+// Função genérica para criar camadas e adicionar dados com ou sem marker cluster
+function createLayerWms(layer, date, id, map) {
+
+    var layerWms;
+
+    layerWms = L.tileLayer.wms("https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi", {
+        layers: layer,
+        format: "image/png",
+        transparent: true,
+        time: date, // ou dynamically set
+        attribution: "NASA GIBS",
+        maxZoom: 9
+    });
+
+    map.addLayer(layerWms);  // Adiciona a camada normal ao mapa
+    layersWms[id] = layerWms;  // Salva a camada para remoção futura
+
+    
+    return layerWms;  // Retorna a camada, caso seja necessário manipular depois
 
 }
