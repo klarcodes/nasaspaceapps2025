@@ -1,5 +1,6 @@
 <?php
 include('./db.php');
+session_start();
 ?>
 
 <!-- optionally define the sidebar content via HTML markup -->
@@ -9,9 +10,16 @@ include('./db.php');
     <div class="leaflet-sidebar-tabs">
         <!-- top aligned tabs -->
         <ul role="tablist">
-            <li><a href="#home" role="tab"><i class="bi bi-list active"></i></a></li>
-            <li><a href="#autopan" role="tab"><i class="bi bi-arrows-move"></i></a></li>
-            <li><a href="#editar" role="tab"><i class="bi bi-arrows-move"></i></a></li>
+            <li><a href="#home" role="tab"><i class="bi bi-list active"></i></a></li>            
+            <?php
+            if(isset($_SESSION['user_id'])){
+                ?>
+                <li><a href="#autopan" role="tab"><i class="bi bi-arrows-move"></i></a></li>
+                <li><a href="#editar" role="tab"><i class="bi bi-arrows-move"></i></a></li>
+                <?php
+            }
+            
+            ?>
             <li><a href="#login" role="tab"><i class="bi bi-person"></i></a></li>
             <!-- <li><a href="#autopan2" role="tab"><i class="bi bi-arrows-move"></i></a></li> -->
         </ul>
@@ -339,19 +347,47 @@ document.querySelector('#editor<?php echo $row['gid'] ?> .ql-editor').style.minH
 
 
 <div class="leaflet-sidebar-pane" id="login">
-    <h1 class="leaflet-sidebar-header">
-        Login
-        <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
-    </h1>
-    
-    <p>
-        Please log in to continue.  
-        Click the button below to open the login form.
-    </p>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-        Open Login Form
-    </button>
+<?php
+            if(isset($_SESSION['user_id'])){
+                ?>
+                <h1 class="leaflet-sidebar-header">
+                    Hello, <?php echo $_SESSION['nome']; ?>
+                    <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
+                </h1>
+                <br>
+                <p>
+                    Your infos:
+                    <?php echo $_SESSION['nome']; ?><br>
+                    <?php echo $_SESSION['email']; ?>
+                </p>
+
+                <button type="button" class="btn btn-danger" id="logoutBtn">
+                    Logout
+                </button>
+                <?php
+            } else {
+                ?>
+                <h1 class="leaflet-sidebar-header">
+                    Login
+                    <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
+                </h1>
+                
+                <p>
+                    Please log in to continue.  
+                    Click the button below to open the login form.
+                </p>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Open Login Form
+                </button>
+                
+                
+                <?php
+            }
+            
+            ?>
+    
 </div>
 
 

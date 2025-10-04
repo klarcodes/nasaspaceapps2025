@@ -273,6 +273,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  fetch("logout.php", {
+    method: "POST"
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Redireciona manualmente após logout
+      window.location.href = "index.php";
+    }
+  })
+  .catch(error => console.error("Erro ao encerrar sessão:", error));
+});
+
 </script>
 
 
