@@ -80,7 +80,7 @@ function createLayer(urlLayer, layerOptions, map, id, conteudo, titulo) {
 
 var layers1 = {};
 
-function addRemoverLayer2(prop, map, filtro, conteudo = '', titulo = '', editBtn, editModal) {
+function addRemoverLayer2(prop, map, filtro, conteudo = '', titulo = '', editBtn, editModal, delModal) {
 
     var checkbox = document.getElementById(filtro);
 
@@ -89,6 +89,7 @@ function addRemoverLayer2(prop, map, filtro, conteudo = '', titulo = '', editBtn
         layers1[filtro] = createLayer2(prop, map, filtro, conteudo, titulo);
         document.getElementById(editBtn).style.display = 'inline-block';
         document.getElementById(editModal).style.display = 'inline-block';
+        document.getElementById(delModal).style.display = 'inline-block';
 
     } else {
         // Se o checkbox estiver desmarcado, remove a camada do mapa
@@ -97,6 +98,7 @@ function addRemoverLayer2(prop, map, filtro, conteudo = '', titulo = '', editBtn
             delete layers1[filtro];  // Remove a referência da camada
             document.getElementById(editBtn).style.display = 'none';
             document.getElementById(editModal).style.display = 'none';
+             document.getElementById(delModal).style.display = 'none';
         }
     }
 }

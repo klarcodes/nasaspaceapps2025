@@ -156,11 +156,58 @@ session_start();
 
                 ?>
 
-                <input class="input" type="checkbox" onclick="addRemoverLayer2('gid', map, <?php echo $row['gid']; ?>, nasa_conteudo, '<?php echo $row['titulo'] ?>', 'editLayer<?php echo $row['gid'] ?>', 'editModalLayer<?php echo $row['gid'] ?>')" id="<?php echo $row['gid'] ?>"> <?php echo $row['titulo'] ?>
+                <input class="input" type="checkbox" onclick="addRemoverLayer2('gid', map, <?php echo $row['gid']; ?>, nasa_conteudo, '<?php echo $row['titulo'] ?>', 'editLayer<?php echo $row['gid'] ?>', 'editModalLayer<?php echo $row['gid'] ?>', 'deleteModalLayer<?php echo $row['gid'] ?>')" id="<?php echo $row['gid'] ?>"> <?php echo $row['titulo'] ?>
                 
                 <button id="editModalLayer<?php echo $row['gid'] ?>" style=" display: none; background: transparent; cursor: pointer; border: none; font-size: 14px;" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#geoModal<?php echo $row['gid'] ?>">📍</button>
 
                 <button style="display: none; background: transparent; cursor: pointer; border: none; font-size: 14px;" class="btn btn-success" id="editLayer<?php echo $row['gid'] ?>" onclick="addRemoverLayerEdit2(nasa_options, map, <?php echo $row['gid']; ?>, nasa_conteudo, '<?php echo $row['titulo'] ?>', 'editLayer<?php echo $row['gid'] ?>', 'geom<?php echo $row['gid']; ?>')">✏️</button>
+
+                <button id="deleteModalLayer<?php echo $row['gid'] ?>" style="display: none; background: transparent; cursor: pointer; border: none; font-size: 14px;" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#deleteGeoModal<?php echo $row['gid'] ?>">❌</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteGeoModal<?php echo $row['gid'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteGeoModalLabel<?php echo $row['gid'] ?>" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-danger shadow-lg">
+      
+      <!-- Cabeçalho -->
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title d-flex align-items-center" id="deleteGeoModalLabel<?php echo $row['gid'] ?>">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          Atenção — Deletar Registro
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Corpo -->
+      <div class="modal-body bg-danger-subtle">
+        <form id="polygonDeleteForm<?php echo $row['gid'] ?>">
+          
+          <!-- GID oculto -->
+          <input type="hidden" name="gid" value="<?php echo $row['gid']; ?>">
+
+          <!-- Mensagem -->
+          <div class="alert alert-danger" role="alert">
+            <strong>Tem certeza?</strong> Essa ação removerá permanentemente o registro e a imagem associada.<br>
+            Essa operação <b>não poderá ser desfeita</b>.
+          </div>
+
+          <!-- Mensagem de retorno -->
+          <div id="polygonDeleteMessage<?php echo $row['gid'] ?>" class="mb-3" style="display:none;"></div>
+
+          <!-- Botões -->
+          <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="polygonDeleteBtn<?php echo $row['gid'] ?>" class="btn btn-danger">
+              <i class="bi bi-trash3-fill me-1"></i> Deletar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Modal -->
@@ -326,6 +373,42 @@ document.querySelector('#editor<?php echo $row['gid'] ?> .ql-editor').style.minH
             msgDiv<?php echo $row['gid'] ?>.style.display = "block";
             msgDiv<?php echo $row['gid'] ?>.className = "mb-3 alert alert-warning";
             msgDiv<?php echo $row['gid'] ?>.textContent = "⚠️ Erro na requisição";
+            console.error(e);
+        }
+    });
+
+
+    // Botão salvar
+    var formD<?php echo $row['gid'] ?> = document.getElementById("polygonDeleteForm<?php echo $row['gid'] ?>");
+    var btnD<?php echo $row['gid'] ?> = document.getElementById("polygonDeleteBtn<?php echo $row['gid'] ?>");
+    var msgDivD<?php echo $row['gid'] ?> = document.getElementById("polygonDeleteMessage<?php echo $row['gid'] ?>");
+
+    btnD<?php echo $row['gid'] ?>.addEventListener("click", async () => {
+        // Salva conteúdo Quill
+        // document.getElementById("content<?php echo $row['gid'] ?>").value = quill<?php echo $row['gid'] ?>.root.innerHTML;
+
+        var formDataD = new FormData(formD<?php echo $row['gid'] ?>);
+
+        try {
+            var response = await fetch("./deletePoly.php", { method:"POST", body:formDataD });
+            var result = await response.json();
+
+            msgDivD<?php echo $row['gid'] ?>.style.display = "block";
+            msgDivD<?php echo $row['gid'] ?>.className = "mb-3 alert " + (result.success ? "alert-success":"alert-danger");
+            msgDivD<?php echo $row['gid'] ?>.textContent = result.success ? "✅ "+result.message : "❌ "+result.message;
+
+            if(result.success){
+                setTimeout(()=>{ 
+                    var modalEl = document.getElementById("deleteGeoModal<?php echo $row['gid'] ?>");
+                    var bootstrapModal = bootstrap.Modal.getInstance(modalEl);
+                    bootstrapModal.hide();
+                    location.reload();
+                },1000);
+            }
+        } catch(e){
+            msgDivD<?php echo $row['gid'] ?>.style.display = "block";
+            msgDivD<?php echo $row['gid'] ?>.className = "mb-3 alert alert-warning";
+            msgDivD<?php echo $row['gid'] ?>.textContent = "⚠️ Erro na requisição";
             console.error(e);
         }
     });
