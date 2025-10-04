@@ -491,7 +491,7 @@ function prepareForm() {
             bootstrapModal.hide();
 
             // Recarrega a página
-            // location.reload();
+            location.reload();
 
             // Redireciona para outra página (opcional)
             // window.location.href = "dashboard.php";
@@ -723,7 +723,7 @@ function prepareForm() {
   });
 
   
-  container.appendChild(geoEditBtn);
+  // container.appendChild(geoEditBtn);
   container.appendChild(geoInfoBtn);
   container.appendChild(deleteButton);
 
