@@ -145,7 +145,11 @@ session_start();
             <br>
                 <?php
 
-                $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json FROM nasa2025.nasa_agua WHERE fk_user=2 ORDER BY gid DESC";
+                if(isset($_SESSION['user_id'])){
+                    $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json FROM nasa2025.nasa_agua WHERE fk_user=".$_SESSION['user_id']." ORDER BY gid DESC";
+                } else {
+                    $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json FROM nasa2025.nasa_agua WHERE fk_user=0 ORDER BY gid DESC";
+                }
                 $result = pg_query($connPg, $sql);
                 if (pg_num_rows($result)) {
                     while ($row = pg_fetch_assoc($result)) {
