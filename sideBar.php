@@ -35,7 +35,7 @@ session_start();
         <div class="leaflet-sidebar-pane" id="home">
 
             <h1 class="leaflet-sidebar-header">
-                MAPS AND LAYERS
+                Maps and Layers
                 <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
             </h1>
 
@@ -266,7 +266,7 @@ session_start();
 
         <div class="leaflet-sidebar-pane" id="autopan">
             <h1 class="leaflet-sidebar-header">
-                Cadastrar Geometria
+                Register Geometry
                 <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
             </h1>
             <div id="texto"></div>
@@ -275,7 +275,7 @@ session_start();
 
         <div class="leaflet-sidebar-pane" id="editar">
             <h1 class="leaflet-sidebar-header">
-                Editar Geometria
+                Edit Geometry
                 <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
             </h1>
             <div id="texto2">
