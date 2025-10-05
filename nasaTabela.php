@@ -1,12 +1,12 @@
 <?php
-include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...)
+include('./db.php'); // Aqui deve estar a conexão PDO: $ConnPdoPg = new PDO(...)
 
 try {
     // Consulta para selecionar os dados geoespaciais e convertê-los em GeoJSON
     $query = "SELECT *, ST_AsGeoJSON(geom) AS geometry_nasa
               FROM nasa2025.nasa_agua";
 
-    $stmt = $pdo->prepare($query);
+    $stmt = $ConnPdoPg->prepare($query);
     $stmt->execute();
 
     $features = [];

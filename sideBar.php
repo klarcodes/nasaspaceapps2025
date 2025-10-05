@@ -342,14 +342,14 @@ try {
                 FROM nasa2025.nasa_agua 
                 WHERE fk_user = :user_id 
                 ORDER BY gid DESC";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $ConnPdoPg->prepare($sql);
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     } else {
         $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json 
                 FROM nasa2025.nasa_agua 
                 WHERE fk_user = 0 
                 ORDER BY gid DESC";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $ConnPdoPg->prepare($sql);
     }
 
     $stmt->execute();

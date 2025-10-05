@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php'); // Conexão PDO ($pdo)
+include('./db.php'); // Conexão PDO ($ConnPdoPg)
 
 // Recebe os dados em JSON
 $data = json_decode(file_get_contents("php://input"), true);
@@ -19,7 +19,7 @@ if (empty($email) || empty($password)) {
 try {
     // Consulta segura usando PDO
     $sql = "SELECT id, nome, cpf, email, senha FROM nasa2025.usuarios WHERE email = :email LIMIT 1";
-    $stmt = $pdo->prepare($sql);
+    $stmt = $ConnPdoPg->prepare($sql);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
 

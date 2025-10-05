@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php'); // Aqui deve ter a conexão PDO, por exemplo: $pdo = new PDO(...);
+include('./db.php'); // Aqui deve ter a conexão PDO, por exemplo: $ConnPdoPg = new PDO(...);
 
 $data = json_decode(file_get_contents("php://input"), true);
 $geom = $data['geom'] ?? null;
@@ -25,7 +25,7 @@ try {
             SET geom = :geom
             WHERE gid = :gid";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $ConnPdoPg->prepare($sql);
 
     // Bind parameters
     $stmt->bindParam(':geom', $geom, PDO::PARAM_STR);

@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...)
+include('./db.php'); // Aqui deve estar a conexão PDO: $ConnPdoPg = new PDO(...)
 
 // Receive fields sent via FormData
 $title = trim($_POST['title'] ?? '');
@@ -58,7 +58,7 @@ try {
 
     $sql .= " WHERE gid = :gid";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $ConnPdoPg->prepare($sql);
 
     // Bind parameters
     $stmt->bindParam(':titulo', $title, PDO::PARAM_STR);

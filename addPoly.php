@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...);
+include('./db.php'); // Aqui deve estar a conexão PDO: $ConnPdoPg = new PDO(...);
 
 // Receive fields sent via FormData
 $title = trim($_POST['title'] ?? '');
@@ -45,7 +45,7 @@ try {
     $sql = "INSERT INTO nasa2025.nasa_agua (titulo, categoria, fk_user, geom, descricao, imagem_dest)
             VALUES (:titulo, :categoria, :fk_user, :geom, :descricao, :imagem_dest)";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $ConnPdoPg->prepare($sql);
 
     $stmt->bindParam(':titulo', $title, PDO::PARAM_STR);
     $stmt->bindParam(':categoria', $category, PDO::PARAM_STR);

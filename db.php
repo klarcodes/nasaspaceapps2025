@@ -17,8 +17,8 @@ $pg_password = "RR@cads#2024";
 
 // Exemplo de conexão PDO
 try {
-    $pdo = new PDO("pgsql:host=$pg_host;dbname=$pg_dbname", $pg_user, $pg_password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $ConnPdoPg = new PDO("pgsql:host=$pg_host;dbname=$pg_dbname", $pg_user, $pg_password);
+    $ConnPdoPg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "Erro na conexão: " . $e->getMessage();
 }
