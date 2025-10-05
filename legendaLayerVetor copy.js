@@ -732,7 +732,7 @@ function prepareForm() {
   });
 
   
-  container.appendChild(geoEditBtn);
+  // container.appendChild(geoEditBtn);
   container.appendChild(geoInfoBtn);
   container.appendChild(deleteButton);
 
