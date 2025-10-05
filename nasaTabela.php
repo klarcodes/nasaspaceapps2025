@@ -1,9 +1,4 @@
 <?php
-// === CORS ===
-// Permite qualquer origem
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-
 
 include('./db.php');
 
