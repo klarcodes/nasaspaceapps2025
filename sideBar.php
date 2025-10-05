@@ -316,7 +316,7 @@ session_start();
 
         <div class="leaflet-sidebar-pane" id="autopan">
             <h1 class="leaflet-sidebar-header">
-                Register Geometry
+                Add Registry
                 <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
             </h1>
             <div id="texto"></div>
@@ -331,7 +331,7 @@ session_start();
             </h1>
             <!-- <a href="#autopan" class="btn btn-success" role="tab">Register Geometry</a> -->
             <br>
-            <button id="abrirAutopan" class="btn btn-primary">Register Geometry</button>
+            <button id="abrirAutopan" class="btn btn-primary">Add Registry</button>
             <div id="texto2">
                 <br>
                 <?php
@@ -370,31 +370,31 @@ session_start();
                             data-bs-keyboard="false" tabindex="-1"
                             aria-labelledby="deleteGeoModalLabel<?php echo $row['gid'] ?>" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                <div class="modal-content border-danger shadow-lg">
+                                <div class="modal-content shadow-lg">
 
                                     <!-- Cabeçalho -->
-                                    <div class="modal-header bg-danger text-white">
-                                        <h5 class="modal-title d-flex align-items-center"
+                                    <div class="modal-header text-white">
+                                        <h5 style="color: #EF4444; font-size: 24px; font-weight: bold;" class="modal-title d-flex align-items-center"
                                             id="deleteGeoModalLabel<?php echo $row['gid'] ?>">
                                             <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                            Delete Register
+                                            Delete Registry?
                                         </h5>
-                                        <button type="button" class="btn-close btn-close-white"
+                                        <button style="color: #EF4444;" type="button" class="btn-close btn-close"
                                             data-bs-dismiss="modal"></button>
                                     </div>
 
                                     <!-- Corpo -->
-                                    <div class="modal-body bg-danger-subtle">
+                                    <div class="modal-body">
                                         <form id="polygonDeleteForm<?php echo $row['gid'] ?>">
 
                                             <!-- GID oculto -->
                                             <input type="hidden" name="gid" value="<?php echo $row['gid']; ?>">
 
                                             <!-- Mensagem -->
-                                            <div class="alert alert-danger" role="alert">
-                                                <strong>Are you sure?</strong> This action will permanently remove the record
-                                                and the associated image.<br>
-                                                This operation <b>cannot be undone</b>.
+                                            <div class="alert alert-secondary" role="alert">
+                                                Are you sure? This action will permanently remove the record
+                                                and the associated image.
+                                                <b style="color: #EF4444;">This operation cannot be undone</b>.
                                             </div>
 
                                             <!-- Mensagem de retorno -->
@@ -403,11 +403,11 @@ session_start();
 
                                             <!-- Botões -->
                                             <div class="d-flex justify-content-end gap-2">
-                                                <button type="button" class="btn btn-secondary"
+                                                <button type="button" class="btn btn-primary"
                                                     data-bs-dismiss="modal">Cancel</button>
                                                 <button type="button" id="polygonDeleteBtn<?php echo $row['gid'] ?>"
                                                     class="btn btn-danger">
-                                                    <i class="bi bi-trash3-fill me-1"></i> Delete
+                                                     Delete
                                                 </button>
                                             </div>
 
@@ -426,7 +426,7 @@ session_start();
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="geoModalLabel<?php echo $row['gid'] ?>">Edit Register</h5>
+                                        <h5 class="modal-title" id="geoModalLabel<?php echo $row['gid'] ?>">Edit Registry</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
 
@@ -703,8 +703,9 @@ session_start();
                 <br>
                 <p>
                     Your infos:
-                    <?php echo $_SESSION['nome']; ?><br>
-                    <?php echo $_SESSION['email']; ?>
+                    <br>
+                    Name: <?php echo $_SESSION['nome']; ?><br>
+                    Email: <?php echo $_SESSION['email']; ?>
                 </p>
 
                 <button type="button" class="btn btn-danger" id="logoutBtn">
