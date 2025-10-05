@@ -1,5 +1,8 @@
 <?php
-
+// === CORS ===
+header("Access-Control-Allow-Origin: *"); // permite qualquer origem, ou substitua pelo seu domínio específico
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 include('./db.php');
 
 // Consulta para selecionar os dados geoespaciais e convertê-los em GeoJSON
