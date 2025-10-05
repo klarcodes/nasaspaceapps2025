@@ -10,32 +10,34 @@ $gid = $data['gid'] ?? null;
 
 // file_put_contents('debug.txt', print_r($data, true)); // 👈 debug
 
-// Validação mínima
+// Basic validation
 if (empty($geom) && empty($gid)) {
-    echo json_encode(["success" => false, "message" => "Todos os campos são obrigatórios", 'gid' => $gid,
-  'geom' => $geom]);
+    echo json_encode([
+        "success" => false,
+        "message" => "All fields are required",
+        'gid' => $gid,
+        'geom' => $geom
+    ]);
     exit;
 }
 
-
-// Atualiza o registro (gid=3 como exemplo)
+// Update record
 $sql = "UPDATE nasa2025.nasa_agua
         SET geom=$1 WHERE gid = '".$gid."';";
 
-// Monta os parâmetros dinamicamente
+// Build parameters dynamically
 $params = [$geom];
-
 
 $result = pg_query_params($connPg, $sql, $params);
 
 if ($result) {
     echo json_encode([
-  'success' => true,
-  'message' => "Geometria atualizada com sucesso!",
-  'gid' => $gid,
-  'geom' => $geom
-]);
+        'success' => true,
+        'message' => "Geometry updated successfully!",
+        'gid' => $gid,
+        'geom' => $geom
+    ]);
 } else {
-    echo json_encode(["success" => false, "message" => "Erro ao atualizar o registro"]);
+    echo json_encode(["success" => false, "message" => "Error updating record"]);
 }
 ?>

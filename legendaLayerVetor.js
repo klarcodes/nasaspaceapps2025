@@ -328,18 +328,18 @@ function addLayerControl(layer, layerName) {
     
 
     <div class="mb-3">
-      <label for="title" class="form-label">Título</label>
+      <label for="title" class="form-label">Title</label>
       <input type="text" class="form-control" id="title" name="title" required maxlength="255">
     </div>
  
     <div class="mb-3">
-      <label class="form-label">Conteúdo</label>
+      <label class="form-label">Content</label>
       <div id="editor"></div>
       <textarea name="content" id="content" hidden></textarea>
     </div>
 
     <div class="mb-3">
-      <label for="categoria" class="form-label">Categoria</label>
+      <label for="categoria" class="form-label">Category</label>
      <select name="categoria" id="categoria" class="form-select">
   <option value="">-- Selecione a categoria --</option>
   <option value="desmatamento">Desmatamento e Perda de Cobertura Vegetal</option>
@@ -353,7 +353,7 @@ function addLayerControl(layer, layerName) {
 </select>
  
 <div class="mb-3">
-      <label for="featured_image" class="form-label">Imagem em Destaque</label>
+      <label for="featured_image" class="form-label">Image</label>
       <input type="file" class="form-control" id="featured_image" name="featured_image" accept="image/*">
       <div class="form-text">Tamanho máximo: 5MB. Formatos: JPG, PNG, GIF</div>
     </div>
@@ -372,7 +372,7 @@ function addLayerControl(layer, layerName) {
   />
 <!-- Mensagem de erro -->
     <div id="polygonMessage" class="mb-3" style="display:none;"></div>
-    <button type="button" id="polygonBtn" class="btn btn-success">Salvar</button>
+    <button type="button" id="polygonBtn" class="btn btn-success">Save</button>
   </form>
 `;
 
@@ -501,7 +501,7 @@ function prepareForm() {
       } catch (error) {
         msgDiv.style.display = "block";
         msgDiv.className = "mb-3 alert alert-warning";
-        msgDiv.textContent = "⚠️ Erro na requisição de salvar";
+        msgDiv.textContent = "⚠️ Request failed";
         console.error(error);
       }
     });
@@ -716,7 +716,7 @@ function prepareForm() {
       } catch (error) {
         msgDiv.style.display = "block";
         msgDiv.className = "mb-3 alert alert-warning";
-        msgDiv.textContent = "⚠️ Erro na requisição de salvar";
+        msgDiv.textContent = "⚠️ Request failed";
         console.error(error);
       }
     });

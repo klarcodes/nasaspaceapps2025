@@ -14,7 +14,7 @@ session_start();
             <?php
             if(isset($_SESSION['user_id'])){
                 ?>
-                <li><a href="#autopan" role="tab"><i class="bi bi-arrows-move"></i></a></li>
+                <li style="display: none;"><a href="#autopan" role="tab"><i class="bi bi-arrows-move"></i></a></li>
                 <li><a href="#editar" role="tab"><i class="bi bi-arrows-move"></i></a></li>
                 <?php
             }
@@ -274,10 +274,14 @@ session_start();
 
 
         <div class="leaflet-sidebar-pane" id="editar">
+            
             <h1 class="leaflet-sidebar-header">
-                Edit Geometry
+                Your Geometries
                 <span class="leaflet-sidebar-close"><i class="bi bi-chevron-left"></i></span>
             </h1>
+            <!-- <a href="#autopan" class="btn btn-success" role="tab">Register Geometry</a> -->
+             <br>
+             <button id="abrirAutopan" class="btn btn-primary">Register Geometry</button>
             <div id="texto2">
             <br>
                 <?php
@@ -310,7 +314,7 @@ session_start();
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title d-flex align-items-center" id="deleteGeoModalLabel<?php echo $row['gid'] ?>">
           <i class="bi bi-exclamation-triangle-fill me-2"></i>
-          Atenção — Deletar Registro
+          Delete Register
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
@@ -324,8 +328,8 @@ session_start();
 
           <!-- Mensagem -->
           <div class="alert alert-danger" role="alert">
-            <strong>Tem certeza?</strong> Essa ação removerá permanentemente o registro e a imagem associada.<br>
-            Essa operação <b>não poderá ser desfeita</b>.
+            <strong>Are you sure?</strong> This action will permanently remove the record and the associated image.<br>
+This operation <b>cannot be undone</b>.
           </div>
 
           <!-- Mensagem de retorno -->
@@ -333,9 +337,9 @@ session_start();
 
           <!-- Botões -->
           <div class="d-flex justify-content-end gap-2">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="button" id="polygonDeleteBtn<?php echo $row['gid'] ?>" class="btn btn-danger">
-              <i class="bi bi-trash3-fill me-1"></i> Deletar
+              <i class="bi bi-trash3-fill me-1"></i> Delete
             </button>
           </div>
 
@@ -352,7 +356,7 @@ session_start();
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="geoModalLabel<?php echo $row['gid'] ?>">Editar Registro</h5>
+                <h5 class="modal-title" id="geoModalLabel<?php echo $row['gid'] ?>">Edit Register</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -360,20 +364,20 @@ session_start();
                 <form id="polygonEditForm<?php echo $row['gid'] ?>">
                     <!-- Título -->
                     <div class="mb-3">
-                        <label for="title<?php echo $row['gid'] ?>" class="form-label">Título</label>
+                        <label for="title<?php echo $row['gid'] ?>" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title<?php echo $row['gid'] ?>" name="title" required maxlength="255" value="<?php echo htmlspecialchars($row['titulo']); ?>">
                     </div>
 
                     <!-- Conteúdo (Quill) -->
                     <div class="mb-3">
-                        <label class="form-label">Conteúdo</label>
+                        <label class="form-label">Content</label>
                         <div id="editor<?php echo $row['gid'] ?>"><?php echo $row['descricao']; ?></div>
                         <textarea name="content" id="content<?php echo $row['gid'] ?>" hidden><?php echo $row['descricao']; ?></textarea>
                     </div>
 
                     <!-- Categoria -->
                     <div class="mb-3">
-                        <label for="categoria<?php echo $row['gid'] ?>" class="form-label">Categoria</label>
+                        <label for="categoria<?php echo $row['gid'] ?>" class="form-label">Category</label>
                         <select name="categoria" id="categoria<?php echo $row['gid'] ?>" class="form-select">                          
                             <option value="">-- Selecione a categoria --</option>
                             <option value="desmatamento" <?php if($row['categoria']=='desmatamento') echo 'selected'; ?>>Desmatamento e Perda de Cobertura Vegetal</option>
@@ -389,11 +393,11 @@ session_start();
 
                     <!-- Imagem -->
                     <div class="mb-3">
-                        <label for="featured_image<?php echo $row['gid'] ?>" class="form-label">Imagem em Destaque</label>
+                        <label for="featured_image<?php echo $row['gid'] ?>" class="form-label">Image</label>
                         <?php if($row['imagem_dest']): ?>
                             <div class="mb-2">
                                 <img src="./imagens/<?php echo htmlspecialchars($row['imagem_dest']); ?>" style="max-height:150px;">
-                                <div class="form-text">Imagem atual</div>
+                                <div class="form-text">Current Image</div>
                             </div>
                         <?php endif; ?>
                         <input type="file" class="form-control" id="featured_image<?php echo $row['gid'] ?>" name="featured_image" accept="image/*">
@@ -410,7 +414,7 @@ session_start();
                     <div id="polygonEditMessage<?php echo $row['gid'] ?>" class="mb-3" style="display:none;"></div>
 
                     <!-- Botão -->
-                    <button type="button" id="polygonEditBtn<?php echo $row['gid'] ?>" class="btn btn-success">Salvar</button>
+                    <button type="button" id="polygonEditBtn<?php echo $row['gid'] ?>" class="btn btn-success">Save</button>
                 </form>
             </div>
         </div>
@@ -418,6 +422,9 @@ session_start();
 </div>
 
 <script>
+    document.getElementById("abrirAutopan").addEventListener("click", function() {
+  document.querySelector('a[href="#autopan"]').click();
+});
 document.addEventListener("DOMContentLoaded", function() {
     // --- Quill JS ---
 var toolbarOptions = [
@@ -509,7 +516,7 @@ document.querySelector('#editor<?php echo $row['gid'] ?> .ql-editor').style.minH
         } catch(e){
             msgDiv<?php echo $row['gid'] ?>.style.display = "block";
             msgDiv<?php echo $row['gid'] ?>.className = "mb-3 alert alert-warning";
-            msgDiv<?php echo $row['gid'] ?>.textContent = "⚠️ Erro na requisição";
+            msgDiv<?php echo $row['gid'] ?>.textContent = "⚠️ Request failed";
             console.error(e);
         }
     });
@@ -545,7 +552,7 @@ document.querySelector('#editor<?php echo $row['gid'] ?> .ql-editor').style.minH
         } catch(e){
             msgDivD<?php echo $row['gid'] ?>.style.display = "block";
             msgDivD<?php echo $row['gid'] ?>.className = "mb-3 alert alert-warning";
-            msgDivD<?php echo $row['gid'] ?>.textContent = "⚠️ Erro na requisição";
+            msgDivD<?php echo $row['gid'] ?>.textContent = "⚠️ Request failed";
             console.error(e);
         }
     });
