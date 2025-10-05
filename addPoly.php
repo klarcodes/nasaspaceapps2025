@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-include('./db.php');
+include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...);
 
 // Receive fields sent via FormData
 $title = trim($_POST['title'] ?? '');
@@ -41,15 +41,25 @@ if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === U
     }
 }
 
-// Insert into database
-$sql = "INSERT INTO nasa2025.nasa_agua (titulo, categoria, fk_user, geom, descricao, imagem_dest)
-        VALUES ($1, $2, $3, $4, $5, $6);";
+try {
+    $sql = "INSERT INTO nasa2025.nasa_agua (titulo, categoria, fk_user, geom, descricao, imagem_dest)
+            VALUES (:titulo, :categoria, :fk_user, :geom, :descricao, :imagem_dest)";
 
-$result = pg_query_params($connPg, $sql, [$title, $category, $_SESSION['user_id'], $geom, $content, $featured_image]);
+    $stmt = $pdo->prepare($sql);
 
-if ($result) {
-    echo json_encode(["success" => true, "message" => "Save successful"]);
-} else {
-    echo json_encode(["success" => false, "message" => "Error saving to database"]);
+    $stmt->bindParam(':titulo', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':categoria', $category, PDO::PARAM_STR);
+    $stmt->bindParam(':fk_user', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->bindParam(':geom', $geom, PDO::PARAM_STR);
+    $stmt->bindParam(':descricao', $content, PDO::PARAM_STR);
+    $stmt->bindParam(':imagem_dest', $featured_image, PDO::PARAM_STR);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true, "message" => "Save successful"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Error saving to database"]);
+    }
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "message" => "PDO Error: " . $e->getMessage()]);
 }
 ?>

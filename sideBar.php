@@ -335,15 +335,26 @@ session_start();
             <div id="texto2">
                 <br>
                 <?php
+try {
+    // Define SQL e parâmetros
+    if (isset($_SESSION['user_id'])) {
+        $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json 
+                FROM nasa2025.nasa_agua 
+                WHERE fk_user = :user_id 
+                ORDER BY gid DESC";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    } else {
+        $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json 
+                FROM nasa2025.nasa_agua 
+                WHERE fk_user = 0 
+                ORDER BY gid DESC";
+        $stmt = $pdo->prepare($sql);
+    }
 
-                if (isset($_SESSION['user_id'])) {
-                    $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json FROM nasa2025.nasa_agua WHERE fk_user=" . $_SESSION['user_id'] . " ORDER BY gid DESC";
-                } else {
-                    $sql = "SELECT *, ST_AsGeoJSON(geom) as geom_json FROM nasa2025.nasa_agua WHERE fk_user=0 ORDER BY gid DESC";
-                }
-                $result = pg_query($connPg, $sql);
-                if (pg_num_rows($result)) {
-                    while ($row = pg_fetch_assoc($result)) {
+    $stmt->execute();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                         ?>
 
@@ -681,7 +692,9 @@ session_start();
 
                         <?php
                     }
-                }
+                } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
                 ?>
 

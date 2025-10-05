@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php');
+include('./db.php'); // Conexão PDO ($pdo)
 
 // Recebe os dados em JSON
 $data = json_decode(file_get_contents("php://input"), true);
@@ -16,26 +16,34 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-// 🔍 Consulta segura
-$sql = "SELECT id, nome, cpf, email, senha FROM nasa2025.usuarios WHERE email = $1 LIMIT 1";
-$result = pg_query_params($connPg, $sql, [$email]);
+try {
+    // Consulta segura usando PDO
+    $sql = "SELECT id, nome, cpf, email, senha FROM nasa2025.usuarios WHERE email = :email LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
 
-if ($row = pg_fetch_assoc($result)) {
-    // Confere senha (armazenada com password_hash)
-    if ($password == $row['senha']) {
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['cpf'] = $row['cpf'];
-        $_SESSION['nome'] = $row['nome'];
-        $_SESSION['email'] = $row['email'];
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        echo json_encode(["success" => true, "message" => "Login successful"]);
+    if ($row) {
+        // Se a senha estiver com hash, use password_verify:
+        // if (password_verify($password, $row['senha'])) { ... }
+        // Caso esteja em texto puro, apenas compare:
+        if ($password === $row['senha']) {
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['cpf'] = $row['cpf'];
+            $_SESSION['nome'] = $row['nome'];
+            $_SESSION['email'] = $row['email'];
+
+            echo json_encode(["success" => true, "message" => "Login successful"]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Invalid password"]);
+        }
     } else {
-        echo json_encode(["success" => false, "message" => "Invalid password"]);
+        echo json_encode(["success" => false, "message" => "User not found"]);
     }
-} else {
-    echo json_encode(["success" => false, "message" => "User not found"]);
+
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "message" => "PDO Error: " . $e->getMessage()]);
 }
-
-
-
 ?>

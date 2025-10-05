@@ -1,41 +1,42 @@
 <?php
+include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...)
 
-include('./db.php');
+try {
+    // Consulta para selecionar os dados geoespaciais e convertê-los em GeoJSON
+    $query = "SELECT *, ST_AsGeoJSON(geom) AS geometry_nasa
+              FROM nasa2025.nasa_agua";
 
-// Consulta para selecionar os dados geoespaciais e convertê-los em GeoJSON
-$query = "SELECT *, ST_AsGeoJSON(geom) AS geometry_nasa
-FROM nasa2025.nasa_agua";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
 
-$result = pg_query($connPg, $query);
+    $features = [];
 
-if (!$result) {
-    die("Erro ao executar a consulta.");
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $feature = [
+            "type" => "Feature",
+            "geometry" => json_decode($row['geometry_nasa']),
+            "properties" => [
+                "gid" => $row['gid'],
+                "titulo" => $row['titulo'],
+                "imagem_dest" => $row['imagem_dest'],
+                "descricao" => $row['descricao'],
+                "categoria" => $row['categoria']
+            ]
+        ];
+        $features[] = $feature;
+    }
+
+    $geojson = [
+        "type" => "FeatureCollection",
+        "features" => $features
+    ];
+
+    echo json_encode($geojson);
+
+} catch (PDOException $e) {
+    echo json_encode([
+        "success" => false,
+        "message" => "PDO Error: " . $e->getMessage()
+    ]);
 }
-
-// Construção do array de GeoJSON
-$features = array();
-
-while ($row = pg_fetch_assoc($result)) {
-    $feature = array(
-        "type" => "Feature",
-        "geometry" => json_decode($row['geometry_nasa']),
-        "properties" => array(
-            "gid" => $row['gid'],
-            "titulo" => $row['titulo'],
-            "imagem_dest" => $row['imagem_dest'],
-            "descricao" => $row['descricao'],
-            "categoria" => $row['categoria']
-        )
-    );
-    array_push($features, $feature);
-}
-
-$geojson = array(
-    "type" => "FeatureCollection",
-    "features" => $features
-);
-
-echo json_encode($geojson);
-
-pg_close($connPg);
 ?>

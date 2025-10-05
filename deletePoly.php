@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-include('./db.php');
+include('./db.php'); // Aqui deve ter a conexão PDO: $pdo = new PDO(...);
 
 $gid = $_POST['gid'] ?? '';
 
@@ -10,33 +10,42 @@ if (empty($gid)) {
     exit;
 }
 
-// 1️⃣ Consulta para obter o nome da imagem
-$sqlSelect = "SELECT imagem_dest FROM nasa2025.nasa_agua WHERE gid = $1";
-$resultSelect = pg_query_params($connPg, $sqlSelect, [$gid]);
+try {
+    // 1️⃣ Consulta para obter o nome da imagem
+    $sqlSelect = "SELECT imagem_dest FROM nasa2025.nasa_agua WHERE gid = :gid";
+    $stmtSelect = $pdo->prepare($sqlSelect);
+    $stmtSelect->bindParam(':gid', $gid, PDO::PARAM_INT);
+    $stmtSelect->execute();
 
-if (!$resultSelect || pg_num_rows($resultSelect) === 0) {
-    echo json_encode(["success" => false, "message" => "Registro não encontrado"]);
-    exit;
-}
+    $row = $stmtSelect->fetch(PDO::FETCH_ASSOC);
 
-$row = pg_fetch_assoc($resultSelect);
-$imageName = $row['imagem_dest'];
-
-// 2️⃣ Remove o arquivo do servidor (se existir)
-if (!empty($imageName)) {
-    $imagePath = __DIR__ . '/uploads/' . $imageName; // ajuste o caminho conforme onde salva
-    if (file_exists($imagePath)) {
-        unlink($imagePath);
+    if (!$row) {
+        echo json_encode(["success" => false, "message" => "Registro não encontrado"]);
+        exit;
     }
-}
 
-// 3️⃣ Exclui o registro do banco
-$sqlDelete = "DELETE FROM nasa2025.nasa_agua WHERE gid = $1";
-$resultDelete = pg_query_params($connPg, $sqlDelete, [$gid]);
+    $imageName = $row['imagem_dest'];
 
-if ($resultDelete) {
-    echo json_encode(["success" => true, "message" => "Registro e imagem removidos com sucesso"]);
-} else {
-    echo json_encode(["success" => false, "message" => "Erro ao excluir o registro"]);
+    // 2️⃣ Remove o arquivo do servidor (se existir)
+    if (!empty($imageName)) {
+        $imagePath = __DIR__ . '/uploads/' . $imageName; // ajuste o caminho conforme onde salva
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+
+    // 3️⃣ Exclui o registro do banco
+    $sqlDelete = "DELETE FROM nasa2025.nasa_agua WHERE gid = :gid";
+    $stmtDelete = $pdo->prepare($sqlDelete);
+    $stmtDelete->bindParam(':gid', $gid, PDO::PARAM_INT);
+
+    if ($stmtDelete->execute()) {
+        echo json_encode(["success" => true, "message" => "Registro e imagem removidos com sucesso"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Erro ao excluir o registro"]);
+    }
+
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "message" => "PDO Error: " . $e->getMessage()]);
 }
 ?>

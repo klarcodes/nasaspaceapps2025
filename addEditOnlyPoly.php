@@ -2,13 +2,11 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php');
+include('./db.php'); // Aqui deve ter a conexão PDO, por exemplo: $pdo = new PDO(...);
 
 $data = json_decode(file_get_contents("php://input"), true);
 $geom = $data['geom'] ?? null;
 $gid = $data['gid'] ?? null;
-
-// file_put_contents('debug.txt', print_r($data, true)); // 👈 debug
 
 // Basic validation
 if (empty($geom) && empty($gid)) {
@@ -21,23 +19,36 @@ if (empty($geom) && empty($gid)) {
     exit;
 }
 
-// Update record
-$sql = "UPDATE nasa2025.nasa_agua
-        SET geom=$1 WHERE gid = '".$gid."';";
+try {
+    // Prepare statement using named parameters
+    $sql = "UPDATE nasa2025.nasa_agua
+            SET geom = :geom
+            WHERE gid = :gid";
 
-// Build parameters dynamically
-$params = [$geom];
+    $stmt = $pdo->prepare($sql);
 
-$result = pg_query_params($connPg, $sql, $params);
+    // Bind parameters
+    $stmt->bindParam(':geom', $geom, PDO::PARAM_STR);
+    $stmt->bindParam(':gid', $gid, PDO::PARAM_INT);
 
-if ($result) {
+    // Execute
+    if ($stmt->execute()) {
+        echo json_encode([
+            'success' => true,
+            'message' => "Geometry updated successfully!",
+            'gid' => $gid,
+            'geom' => $geom
+        ]);
+    } else {
+        echo json_encode([
+            "success" => false,
+            "message" => "Error updating record"
+        ]);
+    }
+} catch (PDOException $e) {
     echo json_encode([
-        'success' => true,
-        'message' => "Geometry updated successfully!",
-        'gid' => $gid,
-        'geom' => $geom
+        "success" => false,
+        "message" => "PDO Error: " . $e->getMessage()
     ]);
-} else {
-    echo json_encode(["success" => false, "message" => "Error updating record"]);
 }
 ?>

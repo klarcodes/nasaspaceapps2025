@@ -2,16 +2,16 @@
 header('Content-Type: application/json');
 session_start();
 
-include('./db.php');
+include('./db.php'); // Aqui deve estar a conexão PDO: $pdo = new PDO(...)
 
 // Receive fields sent via FormData
 $title = trim($_POST['title'] ?? '');
 $category = trim($_POST['categoria'] ?? '');
-$content = $_POST['content'] ?? ''; // if you also want to save a description
-$gid = $_POST['gid'] ?? ''; // if you also want to save an ID
+$content = $_POST['content'] ?? '';
+$gid = $_POST['gid'] ?? '';
 
 // Basic validation
-if (empty($title) || empty($category)) {
+if (empty($title) || empty($category) || empty($gid)) {
     echo json_encode(["success" => false, "message" => "All fields are required"]);
     exit;
 }
@@ -20,13 +20,11 @@ if (empty($title) || empty($category)) {
 $featured_image = '';
 
 if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
-
     $target_dir = "./images/";
     if (!is_dir($target_dir)) mkdir($target_dir, 0755, true);
 
     $file_extension = strtolower(pathinfo($_FILES["featured_image"]["name"], PATHINFO_EXTENSION));
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
-
     if (!in_array($file_extension, $allowed_extensions)) {
         echo json_encode(["success" => false, "message" => "File format not allowed!"]);
         exit;
@@ -49,21 +47,36 @@ if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === U
     }
 }
 
-// Update record (gid=3 as example)
-$sql = "UPDATE nasa2025.nasa_agua
-        SET titulo=$1, categoria=$2, fk_user=$3, descricao=$4" .
-       ($featured_image ? ", imagem_dest=$5" : "") .
-       " WHERE gid = '".$gid."';";
+try {
+    // Build SQL dynamically
+    $sql = "UPDATE nasa2025.nasa_agua
+            SET titulo = :titulo, categoria = :categoria, fk_user = :fk_user, descricao = :descricao";
 
-// Build parameters dynamically
-$params = [$title, $category, $_SESSION['user_id'], $content];
-if ($featured_image) $params[] = $featured_image;
+    if ($featured_image) {
+        $sql .= ", imagem_dest = :imagem_dest";
+    }
 
-$result = pg_query_params($connPg, $sql, $params);
+    $sql .= " WHERE gid = :gid";
 
-if ($result) {
-    echo json_encode(["success" => true, "message" => "Update successful"]);
-} else {
-    echo json_encode(["success" => false, "message" => "Error updating record"]);
+    $stmt = $pdo->prepare($sql);
+
+    // Bind parameters
+    $stmt->bindParam(':titulo', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':categoria', $category, PDO::PARAM_STR);
+    $stmt->bindParam(':fk_user', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->bindParam(':descricao', $content, PDO::PARAM_STR);
+    if ($featured_image) {
+        $stmt->bindParam(':imagem_dest', $featured_image, PDO::PARAM_STR);
+    }
+    $stmt->bindParam(':gid', $gid, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true, "message" => "Update successful"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Error updating record"]);
+    }
+
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "message" => "PDO Error: " . $e->getMessage()]);
 }
 ?>
