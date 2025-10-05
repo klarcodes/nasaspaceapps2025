@@ -142,13 +142,13 @@
 
             <div class="tab-pane fade show active" id="sidebar-tabpanel-0" role="tabpanel" aria-labelledby="sidebar-tab-0">
               <ul class="sidebar-nav" id="sidebar-nav-0">
-                <p>O sistema de mapeamento ambiental desenvolvido em Leaflet foi projetado para permitir a visualização, análise e edição de informações geoespaciais diretamente em um ambiente web interativo. Ele combina camadas de mapas convencionais, dados científicos provenientes da NASA GIBS, e um módulo avançado de cadastro e gerenciamento de geometrias vetoriais, que possibilita a criação e armazenamento de polígonos, linhas ou pontos em um banco de dados espacial PostGIS.</p>
+                <p>The environmental mapping system developed in Leaflet was designed to enable the visualization, analysis, and editing of geospatial information directly within an interactive web environment. It combines conventional map layers, scientific data from NASA GIBS, and an advanced module for the registration and management of vector geometries, allowing the creation and storage of polygons, lines, or points in a PostGIS spatial database.</p>
               </ul>
             </div>
 
             <div class="tab-pane fade" id="sidebar-tabpanel-1" role="tabpanel" aria-labelledby="sidebar-tab-1">
               <ul class="sidebar-nav" id="sidebar-nav-1">
-                <p>A interface principal do sistema é composta por um mapa interativo e um painel lateral (sidebar) que organiza os diferentes grupos de camadas. O usuário pode alternar entre mapas base, como OpenStreetMap, Google Satellite ou Google Terrain, e ativar conjuntos de camadas especializadas, como as de monitoramento ambiental fornecidas pela NASA. Essas camadas permitem visualizar informações de vegetação, ocupação urbana, corpos d’água e índices ambientais atualizados via serviço GIBS (Global Imagery Browse Services).</p>
+                <p>The main interface of the system consists of an interactive map and a sidebar panel that organizes different groups of layers. The user can switch between base maps, such as OpenStreetMap, Google Satellite, or Google Terrain, and activate specialized layer sets, such as environmental monitoring layers provided by NASA. These layers allow the visualization of vegetation, urban areas, water bodies, and environmental indices, updated through the GIBS (Global Imagery Browse Services) platform.</p>
 
                 <img src="./imagens/mapa1.png" alt="">
               </ul>
@@ -156,28 +156,27 @@
 
             <div class="tab-pane fade" id="sidebar-tabpanel-2" role="tabpanel" aria-labelledby="sidebar-tab-2">
               <ul class="sidebar-nav" id="sidebar-nav-2">
-                <p>Para acessar as funcionalidades relacionadas à manipulação e ao desenho de polígonos, é necessário que o usuário realize login com e-mail e senha. Essa autenticação é feita de forma simples, por meio do menu lateral, na aba de usuário, onde há um botão que abre um modal de login.</p>
+                <p>To access the functionalities related to polygon manipulation and drawing, the user must log in with an email and password. This authentication is performed in a simple way through the sidebar menu, in the user tab, where there is a button that opens a login modal.</p>
                 <img src="./imagens/mapa4.png" alt="">
-                <p>Após o login, a interface se adapta automaticamente: a aba de usuário passa a exibir as informações da conta logada e um botão de logout, além de liberar novas abas no menu lateral, como as opções de cadastro e edição de polígonos.</p>
+                <p>After login, the interface automatically adapts: the user tab starts displaying the logged-in account information and a logout button, in addition to unlocking new tabs in the sidebar menu, such as the polygon registration and editing options.</p>
                 <img src="./imagens/mapa5.png" alt="">
               </ul>
             </div>
 
             <div class="tab-pane fade" id="sidebar-tabpanel-3" role="tabpanel" aria-labelledby="sidebar-tab-3">
               <ul class="sidebar-nav" id="sidebar-nav-3">
-                <p>No módulo “Cadastrar Geometria” (que requer login de usuário), é voltado para a criação de vetores personalizados que representam áreas de interesse ambiental, zonas de risco ou qualquer outro tipo de informação espacial relevante. Esse módulo é responsável por adicionar desenho e edição de vetores diretamente sobre o mapa. Assim, o usuário pode desenhar polígonos, linhas ou marcadores e ajustar conforme necessário.</p>
-                <p>Uma vez desenhado um vetor, o sistema cria automaticamente uma referência visual no painel lateral. Cada geometria aparece listada com opções individuais de controle, permitindo mudar a cor da borda, ajustar a opacidade do preenchimento, aplicar zoom diretamente na camada, alternar a visibilidade no mapa ou excluir o vetor. Essa interface garante que o usuário possa manipular cada elemento de forma prática e organizada, sem a necessidade de recorrer a menus complexos.</p>
+                <p>Once a vector is drawn, the system automatically creates a visual reference in the sidebar panel. Each geometry is listed with individual control options, allowing the user to change the border color, adjust fill opacity, zoom directly to the layer, toggle visibility on the map, or delete the vector. This interface ensures that users can manage each element easily and efficiently, without the need to navigate through complex menus.</p>
                 <img src="./imagens/mapa2.png" alt="">
-                <p>Ao clicar no ícone de salvar, o sistema abre um formulário em um modal, no qual o usuário pode preencher informações descritivas sobre a geometria — como o título, conteúdo, categoria e imagem em destaque. Esses dados são então associados à geometria desenhada, formando um conjunto completo de informações espaciais e descritivas. Ao apertar no botão salvar, esse registro é salvo no banco de dados Postgis o registro é mostrado no sistema.</p>
+                <p>When clicking the save icon, the system opens a form in a modal where the user can fill in descriptive information about the geometry — such as the title, content, category, and featured image. These data are then associated with the drawn geometry, forming a complete set of spatial and descriptive information. When pressing the save button, this record is saved in the PostGIS database, and the record is displayed in the system.</p>
                 <img src="./imagens/mapa3.png" alt="">
               </ul>
             </div>
 
             <div class="tab-pane fade" id="sidebar-tabpanel-4" role="tabpanel" aria-labelledby="sidebar-tab-4">
               <ul class="sidebar-nav" id="sidebar-nav-4">
-                <p>Com acesso autenticado, o usuário pode editar os polígonos cadastrados de forma completa. O botão com o ícone de lápis permite alterar o tamanho ou formato do polígono diretamente no mapa, que é efetivada a alteração quando clicado novamente.</p>
+                <p>With authenticated access, the user can fully edit the registered polygons. The button with the pencil icon allows changing the size or shape of the polygon directly on the map, and the modification is applied when the button is clicked again.</p>
                 <img src="./imagens/mapa6.png" alt="">
-                <p>Existe outro botão que abre um modal específico para edição das informações associadas ao vetor, garantindo controle total sobre os dados e a geometria.</p>
+                <p>There is another button that opens a specific modal for editing the information associated with the vector, ensuring full control over both the data and the geometry.</p>
                 <img src="./imagens/mapa7.png" alt="">
               </ul>
             </div>
