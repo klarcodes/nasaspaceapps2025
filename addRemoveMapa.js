@@ -201,7 +201,7 @@ function createLayer2(prop, map, filtro, conteudo, titulo) {
 
 
     // var url = 'http://localhost/nasaspaceapps2025/';
-    var url = 'https://nasaspaceapps2025.klar.codes';
+    var url = 'https://nasaspaceapps2025.klar.codes/';
 
     $.getJSON(url + 'nasaTabela.php', function (data) {
 
