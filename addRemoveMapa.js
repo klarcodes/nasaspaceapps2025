@@ -32,8 +32,8 @@ function createLayer(urlLayer, layerOptions, map, id, conteudo, titulo, php, tab
 
     if(php == true){
 
-        //var url = 'http://localhost/nasaspaceapps2025/'+tabela;
-        var url = 'https://nasaspaceapps2025.klar.codes/'+tabela;
+        var url = 'http://localhost/nasaspaceapps2025/'+tabela;
+        //var url = 'https://nasaspaceapps2025.klar.codes/'+tabela;
 
     }else{
 
@@ -200,8 +200,8 @@ function createLayer2(prop, map, filtro, conteudo, titulo) {
     // Cria uma camada GeoJSON normal (sem cluster)
 
 
-    // var url = 'http://localhost/nasaspaceapps2025/';
-    var url = 'https://nasaspaceapps2025.klar.codes/';
+     var url = 'http://localhost/nasaspaceapps2025/';
+    //var url = 'https://nasaspaceapps2025.klar.codes/';
 
     $.getJSON(url + 'nasaTabela.php', function (data) {
 
