@@ -510,217 +510,217 @@ function prepareForm() {
 
   
 
-  // Botão para abrir o modal com informações da geometria
-  const geoEditBtn = document.createElement("button");
-  geoEditBtn.innerHTML = "E";
-  geoEditBtn.title = "Editar Geometria";
-  geoEditBtn.style.border = "none";
-  geoEditBtn.style.background = "transparent";
-  geoEditBtn.style.cursor = "pointer";
-  geoEditBtn.style.fontSize = "14px";
+//   // Botão para abrir o modal com informações da geometria
+//   const geoEditBtn = document.createElement("button");
+//   geoEditBtn.innerHTML = "E";
+//   geoEditBtn.title = "Editar Geometria";
+//   geoEditBtn.style.border = "none";
+//   geoEditBtn.style.background = "transparent";
+//   geoEditBtn.style.cursor = "pointer";
+//   geoEditBtn.style.fontSize = "14px";
 
-  geoEditBtn.addEventListener("click", function () {
-    // Atualiza o título do modal
-    const modalTitle = document.getElementById("staticBackdropLabel");
-    modalTitle.textContent = `Geometria da Camada: ${layerName}`;
+//   geoEditBtn.addEventListener("click", function () {
+//     // Atualiza o título do modal
+//     const modalTitle = document.getElementById("staticBackdropLabel");
+//     modalTitle.textContent = `Geometria da Camada: ${layerName}`;
 
-    // Atualiza o corpo do modal
-    const modalBody = document.getElementById("modalBody");
-    // modalBody.innerHTML = ""; // Limpa o conteúdo anterior
+//     // Atualiza o corpo do modal
+//     const modalBody = document.getElementById("modalBody");
+//     // modalBody.innerHTML = ""; // Limpa o conteúdo anterior
 
-    // // Cria o campo de texto com a geometria
-    // const geoInput = document.createElement("input");
-    // geoInput.readOnly = true;
-    // geoInput.type = "text";
-    // geoInput.className = "form-control";
-    // geoInput.name = "geom";
-    // // geoInput.style.fontFamily = "monospace";
-    // // geoInput.style.fontSize = "12px";
-    // // geoInput.style.resize = "none";
-    // // geoInput.style.border = "1px solid #ccc";
-    // // geoInput.style.borderRadius = "4px";
-    // geoInput.value = JSON.stringify(layer.toGeoJSON().features[0].geometry);
+//     // // Cria o campo de texto com a geometria
+//     // const geoInput = document.createElement("input");
+//     // geoInput.readOnly = true;
+//     // geoInput.type = "text";
+//     // geoInput.className = "form-control";
+//     // geoInput.name = "geom";
+//     // // geoInput.style.fontFamily = "monospace";
+//     // // geoInput.style.fontSize = "12px";
+//     // // geoInput.style.resize = "none";
+//     // // geoInput.style.border = "1px solid #ccc";
+//     // // geoInput.style.borderRadius = "4px";
+//     // geoInput.value = JSON.stringify(layer.toGeoJSON().features[0].geometry);
 
-    // modalBody.appendChild(geoInput);
+//     // modalBody.appendChild(geoInput);
 
 
 
-    // HTML completo que inclui o input de geometria + formulário de login
-    modalBody.innerHTML = `
-  <!-- Formulário -->
-  <form id="polygonEditForm">
+//     // HTML completo que inclui o input de geometria + formulário de login
+//     modalBody.innerHTML = `
+//   <!-- Formulário -->
+//   <form id="polygonEditForm">
     
 
-    <div class="mb-3">
-      <label for="title" class="form-label">Título</label>
-      <input type="text" class="form-control" id="title" name="title" required maxlength="255">
-    </div>
+//     <div class="mb-3">
+//       <label for="title" class="form-label">Título</label>
+//       <input type="text" class="form-control" id="title" name="title" required maxlength="255">
+//     </div>
  
-    <div class="mb-3">
-      <label class="form-label">Conteúdo</label>
-      <div id="editor"></div>
-      <textarea name="content" id="content" hidden></textarea>
-    </div>
+//     <div class="mb-3">
+//       <label class="form-label">Conteúdo</label>
+//       <div id="editor"></div>
+//       <textarea name="content" id="content" hidden></textarea>
+//     </div>
 
-    <div class="mb-3">
-      <label for="categoria" class="form-label">Categoria</label>
-     <select name="categoria" id="categoria" class="form-select">
-  <option value="">-- Selecione a categoria --</option>
-  <option value="desmatamento">Desmatamento e Perda de Cobertura Vegetal</option>
-  <option value="poluicao">Poluição Atmosférica e Industrial</option>
-  <option value="enchentes">Enchentes e Inundações</option>
-  <option value="ilhas_calor">Ilhas de Calor e Falta de Áreas Verdes</option>
-  <option value="erosao_assoreamento">Erosão, Assoreamento e Impacto em Rios</option>
-  <option value="urbanizacao">Saneamento e Urbanização Desordenada</option>
-  <option value="riscos_geologicos">Riscos Geológicos e Geotécnicos</option>
-  <option value="escassez_hidrica">Escassez e Contaminação Hídrica</option>
-</select>
+//     <div class="mb-3">
+//       <label for="categoria" class="form-label">Categoria</label>
+//      <select name="categoria" id="categoria" class="form-select">
+//   <option value="">-- Selecione a categoria --</option>
+//   <option value="desmatamento">Desmatamento e Perda de Cobertura Vegetal</option>
+//   <option value="poluicao">Poluição Atmosférica e Industrial</option>
+//   <option value="enchentes">Enchentes e Inundações</option>
+//   <option value="ilhas_calor">Ilhas de Calor e Falta de Áreas Verdes</option>
+//   <option value="erosao_assoreamento">Erosão, Assoreamento e Impacto em Rios</option>
+//   <option value="urbanizacao">Saneamento e Urbanização Desordenada</option>
+//   <option value="riscos_geologicos">Riscos Geológicos e Geotécnicos</option>
+//   <option value="escassez_hidrica">Escassez e Contaminação Hídrica</option>
+// </select>
  
-<div class="mb-3">
-      <label for="featured_image" class="form-label">Imagem em Destaque</label>
-      <input type="file" class="form-control" id="featured_image" name="featured_image" accept="image/*">
-      <div class="form-text">Tamanho máximo: 5MB. Formatos: JPG, PNG, GIF</div>
-    </div>
+// <div class="mb-3">
+//       <label for="featured_image" class="form-label">Imagem em Destaque</label>
+//       <input type="file" class="form-control" id="featured_image" name="featured_image" accept="image/*">
+//       <div class="form-text">Tamanho máximo: 5MB. Formatos: JPG, PNG, GIF</div>
+//     </div>
 
 
-    </div>    
+//     </div>    
    
-<!-- Mensagem de erro -->
-    <div id="polygonEditMessage" class="mb-3" style="display:none;"></div>
-    <button type="button" id="polygonEditBtn" class="btn btn-success">Salvar</button>
-  </form>
-`;
+// <!-- Mensagem de erro -->
+//     <div id="polygonEditMessage" class="mb-3" style="display:none;"></div>
+//     <button type="button" id="polygonEditBtn" class="btn btn-success">Salvar</button>
+//   </form>
+// `;
 
 
-// --- Quill JS ---
-const toolbarOptions = [
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  ['blockquote', 'code-block'],
-  [{ 'direction': 'rtl' }],
-  [{ 'align': [] }],
-  ['bold', 'italic', 'underline', 'strike'],
-  [{ 'color': [] }, { 'background': [] }],
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  ['link', 'image', 'video'],
-  ['clean']
-];
+// // --- Quill JS ---
+// const toolbarOptions = [
+//   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+//   ['blockquote', 'code-block'],
+//   [{ 'direction': 'rtl' }],
+//   [{ 'align': [] }],
+//   ['bold', 'italic', 'underline', 'strike'],
+//   [{ 'color': [] }, { 'background': [] }],
+//   [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+//   ['link', 'image', 'video'],
+//   ['clean']
+// ];
 
-const quill = new Quill('#editor', {
-  theme: 'snow',
-  placeholder: 'Escreva o conteúdo da postagem...',
-  modules: {
-    toolbar: {
-      container: toolbarOptions,
-      handlers: { image: imageHandler }
-    },
-    imageResize: { displaySize: true }
-  }
-});
+// const quill = new Quill('#editor', {
+//   theme: 'snow',
+//   placeholder: 'Escreva o conteúdo da postagem...',
+//   modules: {
+//     toolbar: {
+//       container: toolbarOptions,
+//       handlers: { image: imageHandler }
+//     },
+//     imageResize: { displaySize: true }
+//   }
+// });
 
-// Função de upload de imagens
-async function imageHandler() {
-  const input = document.createElement('input');
-  input.setAttribute('type', 'file');
-  input.setAttribute('accept', 'image/*');
-  input.click();
+// // Função de upload de imagens
+// async function imageHandler() {
+//   const input = document.createElement('input');
+//   input.setAttribute('type', 'file');
+//   input.setAttribute('accept', 'image/*');
+//   input.click();
 
-  input.onchange = async () => {
-    const file = input.files[0];
-    if (!file) return;
+//   input.onchange = async () => {
+//     const file = input.files[0];
+//     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) { alert('Arquivo muito grande. Máx 5MB'); return; }
-    if (!['image/jpeg','image/png','image/gif'].includes(file.type)) { alert('Formato inválido'); return; }
+//     if (file.size > 5 * 1024 * 1024) { alert('Arquivo muito grande. Máx 5MB'); return; }
+//     if (!['image/jpeg','image/png','image/gif'].includes(file.type)) { alert('Formato inválido'); return; }
 
-    try {
-      const formData = new FormData();
-      formData.append('image', file);
+//     try {
+//       const formData = new FormData();
+//       formData.append('image', file);
 
-      const res = await fetch('upload_image.php', { method: 'POST', body: formData });
-      if (!res.ok) throw new Error('Falha no upload');
-      const data = await res.json();
+//       const res = await fetch('upload_image.php', { method: 'POST', body: formData });
+//       if (!res.ok) throw new Error('Falha no upload');
+//       const data = await res.json();
 
-      if (data.success && data.url) {
-        const range = quill.getSelection(true);
-        quill.insertEmbed(range.index, 'image', data.url);
-        quill.setSelection(range.index + 1);
-      } else {
-        alert(data.error || 'Erro desconhecido ao enviar imagem');
-      }
-    } catch (error) {
-      console.error('Erro no upload:', error);
-      alert('Erro ao enviar imagem. Tente novamente.');
-    }
-  };
-}
+//       if (data.success && data.url) {
+//         const range = quill.getSelection(true);
+//         quill.insertEmbed(range.index, 'image', data.url);
+//         quill.setSelection(range.index + 1);
+//       } else {
+//         alert(data.error || 'Erro desconhecido ao enviar imagem');
+//       }
+//     } catch (error) {
+//       console.error('Erro no upload:', error);
+//       alert('Erro ao enviar imagem. Tente novamente.');
+//     }
+//   };
+// }
 
-// Preparação do formulário antes do envio
-function prepareForm() {
-  const title = document.getElementById('title').value.trim();
-  const content = document.getElementById('content');
-  const category = document.getElementById('categoria').value;
+// // Preparação do formulário antes do envio
+// function prepareForm() {
+//   const title = document.getElementById('title').value.trim();
+//   const content = document.getElementById('content');
+//   const category = document.getElementById('categoria').value;
 
-  content.value = quill.root.innerHTML.trim();
+//   content.value = quill.root.innerHTML.trim();
 
-  if (!title) { alert('O título não pode estar vazio.'); return false; }
-  if (content.value === '' || content.value === '<p><br></p>') { alert('O conteúdo não pode estar vazio.'); return false; }
-  if (!category) { alert('Selecione uma categoria.'); return false; }
+//   if (!title) { alert('O título não pode estar vazio.'); return false; }
+//   if (content.value === '' || content.value === '<p><br></p>') { alert('O conteúdo não pode estar vazio.'); return false; }
+//   if (!category) { alert('Selecione uma categoria.'); return false; }
 
-  return true;
-}
-
-
+//   return true;
+// }
 
 
-    // Abre o modal usando Bootstrap
-    const modalElement = document.getElementById("staticBackdrop");
-    const bootstrapModal = new bootstrap.Modal(modalElement);
-    bootstrapModal.show();
 
 
-    // Adiciona o JS do botão login (não precisa de DOMContentLoaded)
-    const form = document.getElementById("polygonEditForm");
-    const btn = document.getElementById("polygonEditBtn");
-    const msgDiv = document.getElementById("polygonEditMessage");
+//     // Abre o modal usando Bootstrap
+//     const modalElement = document.getElementById("staticBackdrop");
+//     const bootstrapModal = new bootstrap.Modal(modalElement);
+//     bootstrapModal.show();
 
-    btn.addEventListener("click", async () => {
-      prepareForm();
-      // Cria FormData para enviar arquivos + campos
-      const formData = new FormData(form);
 
-      try {
-        const response = await fetch("./addEditPoly.php", {
-          method: "POST",
-          body: formData // importante: NÃO usar JSON.stringify nem Content-Type
-        });
+//     // Adiciona o JS do botão login (não precisa de DOMContentLoaded)
+//     const form = document.getElementById("polygonEditForm");
+//     const btn = document.getElementById("polygonEditBtn");
+//     const msgDiv = document.getElementById("polygonEditMessage");
 
-        const result = await response.json();
+//     btn.addEventListener("click", async () => {
+//       prepareForm();
+//       // Cria FormData para enviar arquivos + campos
+//       const formData = new FormData(form);
 
-        msgDiv.style.display = "block";
-        msgDiv.className = "mb-3 alert " + (result.success ? "alert-success" : "alert-danger");
-        msgDiv.textContent = result.success
-          ? "✅ " + result.message
-          : "❌ " + result.message;
+//       try {
+//         const response = await fetch("./addEditPoly.php", {
+//           method: "POST",
+//           body: formData // importante: NÃO usar JSON.stringify nem Content-Type
+//         });
 
-        if (result.success) {
-          setTimeout(() => {
-            bootstrapModal.hide();
+//         const result = await response.json();
 
-            // Recarrega a página
-            // location.reload();
+//         msgDiv.style.display = "block";
+//         msgDiv.className = "mb-3 alert " + (result.success ? "alert-success" : "alert-danger");
+//         msgDiv.textContent = result.success
+//           ? "✅ " + result.message
+//           : "❌ " + result.message;
 
-            // Redireciona para outra página (opcional)
-            // window.location.href = "dashboard.php";
-          }, 1000);
-        }
+//         if (result.success) {
+//           setTimeout(() => {
+//             bootstrapModal.hide();
 
-      } catch (error) {
-        msgDiv.style.display = "block";
-        msgDiv.className = "mb-3 alert alert-warning";
-        msgDiv.textContent = "⚠️ Request failed";
-        console.error(error);
-      }
-    });
-  });
+//             // Recarrega a página
+//             // location.reload();
+
+//             // Redireciona para outra página (opcional)
+//             // window.location.href = "dashboard.php";
+//           }, 1000);
+//         }
+
+//       } catch (error) {
+//         msgDiv.style.display = "block";
+//         msgDiv.className = "mb-3 alert alert-warning";
+//         msgDiv.textContent = "⚠️ Request failed";
+//         console.error(error);
+//       }
+//     });
+//   });
 
   
   // container.appendChild(geoEditBtn);
