@@ -1,8 +1,8 @@
 
 // Icones 
 
-// var urlIcones = 'http://localhost/sig_nasa/';
-var urlIcones = 'https://nasaspaceapps2025.klar.codes/'
+// var urlIcones = 'http://localhost/nasaspaceapps2025/';
+var urlIcones = 'https://nasaspaceapps2025.klar.codes';
 
   var whiteIcon = new L.Icon({
     iconSize: [35, 35],
