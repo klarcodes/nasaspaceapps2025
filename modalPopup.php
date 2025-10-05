@@ -65,3 +65,86 @@
 </div>
 
 
+<div class="modal fade" id="tutorialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tutorialModalLabel" aria-hidden="true" style="z-index: 1000000000;">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="tutorialModalLabel">Tutorial</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="tutorialModalBody">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="sidebarTab" role="tablist">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id="sidebar-tab-0" data-bs-toggle="tab" data-bs-target="#sidebar-tabpanel-0" type="button" role="tab" aria-controls="sidebar-tabpanel-0" aria-selected="true" onclick="mudarPagina('mapaMain')">
+                Informação
+              </button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="sidebar-tab-1" data-bs-toggle="tab" data-bs-target="#sidebar-tabpanel-1" type="button" role="tab" aria-controls="sidebar-tabpanel-1" aria-selected="false">
+                Tutorial
+              </button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="sidebar-tab-2" data-bs-toggle="tab" data-bs-target="#sidebar-tabpanel-2" type="button" role="tab" aria-controls="sidebar-tabpanel-2" aria-selected="false">
+                Tutorial
+              </button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="sidebar-tab-3" data-bs-toggle="tab" data-bs-target="#sidebar-tabpanel-3" type="button" role="tab" aria-controls="sidebar-tabpanel-3" aria-selected="false" onclick="mudarPagina('legenda')">
+                Tutorial
+              </button>
+            </li>
+            <!-- <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="sidebar-tab-4" data-bs-toggle="tab" data-bs-target="#sidebar-tabpanel-4" type="button" role="tab" aria-controls="sidebar-tabpanel-4" aria-selected="false" onclick="mudarPagina('legenda')">
+                Vídeo Aulas
+              </button>
+            </li> -->
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content pt-3" id="sidebarTabContent">
+
+            <div class="tab-pane fade show active" id="sidebar-tabpanel-0" role="tabpanel" aria-labelledby="sidebar-tab-0">
+              <ul class="sidebar-nav" id="sidebar-nav-0">
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="sidebar-tabpanel-1" role="tabpanel" aria-labelledby="sidebar-tab-1">
+
+              <ul class="sidebar-nav" id="sidebar-nav-1">
+
+              </ul>
+
+            </div>
+
+            <div class="tab-pane fade" id="sidebar-tabpanel-2" role="tabpanel" aria-labelledby="sidebar-tab-2">
+
+            </div>
+
+            <div class="tab-pane fade" id="sidebar-tabpanel-3" role="tabpanel" aria-labelledby="sidebar-tab-3">
+              <ul class="sidebar-nav" id="sidebar-nav-3">
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="sidebar-tabpanel-4" role="tabpanel" aria-labelledby="sidebar-tab-4">
+              <ul class="sidebar-nav" id="sidebar-nav-4">
+
+              </ul>
+            </div>
+          </div>
+
+
+ 
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#tutorialModal').modal('show');
+  });
+</script>

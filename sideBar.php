@@ -35,7 +35,7 @@ session_start();
         <div class="leaflet-sidebar-pane" id="home">
 
             <h1 class="leaflet-sidebar-header">
-                sidebar-v2
+                MAPS AND LAYERS
                 <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
             </h1>
 
@@ -45,14 +45,14 @@ session_start();
                 <!-- Mapas - Início -->
 
                 <li>
-                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Mapas</b></span>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Maps</b></span>
                     <ul class="tree-submenu show">
                         <li><input class="input" type="radio" name="mapa" id="input" onclick="mapas(osm)" checked> OMS
                         </li>
-                        <li><input class="input" type="radio" name="mapa" id="input" onclick="mapas(satelite)"> Satélite
+                        <li><input class="input" type="radio" name="mapa" id="input" onclick="mapas(satelite)"> Satellite
                         </li>
                         <li><input class="input" type="radio" name="mapa" id="input" onclick="mapas(googleSat)"> Google
-                            Satélite</li>
+                            Satellite</li>
                         <li><input class="input" type="radio" name="mapa" id="input" onclick="mapas(googleTerrain)">
                             Google Terrain</li>
                     </ul>
@@ -63,7 +63,7 @@ session_start();
                 <!-- Mapas da NASA - Início -->
 
                 <li>
-                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Mapas da NASA</b></span>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>NASA Maps</b></span>
                     <ul class="tree-submenu show">
 
                         <li>
@@ -173,7 +173,7 @@ session_start();
                 <!-- Análise Ambiental - Início -->
 
                 <li>
-                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Análise Ambiental</b></span>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Environmental Analysis</b></span>
                     <ul class="tree-submenu show">
 
                         <!-- Análise Ambiental - Início -->
@@ -181,25 +181,25 @@ session_start();
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'desmatamento', nasa_conteudo, 'Desmatamento')"
-                                id="desmatamento"> Desmatamento
+                                id="desmatamento"> Deforestation
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'poluicao', nasa_conteudo, 'Poluicao')"
-                                id="poluicao"> Poluicao
+                                id="poluicao"> Pollution
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'enchentes', nasa_conteudo, 'Enchentes')"
-                                id="enchentes"> Enchentes
+                                id="enchentes"> Floods
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'ilhas_calor', nasa_conteudo, 'Ilhas de Calor')"
-                                id="ilhas_calor"> Ilhas de Calor
+                                id="ilhas_calor"> Heat Islands
                         </li>
 
                         <li>
@@ -210,19 +210,19 @@ session_start();
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'urbanizacao', nasa_conteudo, 'Urbanizacao')"
-                                id="urbanizacao"> Urbanizacao
+                                id="urbanizacao"> Urbanization
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'riscos_geologicos', nasa_conteudo, 'Riscos Geologicos')"
-                                id="riscos_geologicos"> Riscos Geologicos
+                                id="riscos_geologicos"> Geological Risks
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer2('categoria', map, 'escassez_hidrica', nasa_conteudo, 'Escassez Hidrica')"
-                                id="escassez_hidrica"> Escassez Hidrica
+                                id="escassez_hidrica"> Water Scarcity
                         </li>
 
 
@@ -235,7 +235,7 @@ session_start();
                 <!-- Base Cartográfica - Início -->
 
                 <li>
-                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Base Cartográfica</b></span>
+                    <span class="tree-toggle expanded" onclick="toggleSubmenu(this)"><b>Cartographic Base</b></span>
                     <ul class="tree-submenu show">
 
                         <!-- Base Cartográfica - Início -->
@@ -243,13 +243,13 @@ session_start();
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer('municipios_limites', limitesMun_options, map, 'limitesMun', limitesMun_conteudo, 'Limites Municipais')"
-                                id="limitesMun" checked> Limites Municipais
+                                id="limitesMun" checked> Municipal Boundaries
                         </li>
 
                         <li>
                             <input class="input" type="checkbox"
                                 onclick="addRemoverLayer('estado_limites', limitesEst_options, map, 'limitesEst', limitesEst_conteudo, 'Limites do Estado')"
-                                id="limitesEst" checked> Limites do Estado
+                                id="limitesEst" checked> State Boundaries
                         </li>
 
 
