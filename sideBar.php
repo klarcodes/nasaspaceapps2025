@@ -737,6 +737,10 @@ try {
                     Click the button below to open the login form.
                 </p>
 
+                <p><b>Login for Tests:</b></p>
+                <p><b>Email:</b> teste@teste.com</p>
+                <p><b>Password:</b> 1234</p>
+
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
                     Open Login Form
                 </button>

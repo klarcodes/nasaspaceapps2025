@@ -83,7 +83,9 @@
           <div id="loginMessage" class="mb-3" style="display:none;">
             <!-- Aqui vai aparecer a mensagem -->
           </div>
-
+                <p><b>Login for Tests:</b></p>
+                <p><b>Email:</b> teste@teste.com</p>
+                <p><b>Password:</b> 1234</p>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" id="email" name="email" required>
@@ -157,6 +159,9 @@
             <div class="tab-pane fade" id="sidebar-tabpanel-2" role="tabpanel" aria-labelledby="sidebar-tab-2">
               <ul class="sidebar-nav" id="sidebar-nav-2">
                 <p>To access the functionalities related to polygon manipulation and drawing, the user must log in with an email and password. This authentication is performed in a simple way through the sidebar menu, in the user tab, where there is a button that opens a login modal.</p>
+                <p><b>Login for Tests:</b></p>
+                <p><b>Email:</b> teste@teste.com</p>
+                <p><b>Password:</b> 1234</p>
                 <img src="./imagens/mapa4.png" alt="">
                 <p>After login, the interface automatically adapts: the user tab starts displaying the logged-in account information and a logout button, in addition to unlocking new tabs in the sidebar menu, such as the polygon registration and editing options.</p>
                 <img src="./imagens/mapa5.png" alt="">
